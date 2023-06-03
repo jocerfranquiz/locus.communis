@@ -1,0 +1,21 @@
+1   8-bit schema xx|yyy|zzz <type of entity | attributes | permits>
+  1
+  2 xx 63 -> 255                                                                     3                                                                                  4 00 - no attributes                                                               5 01 w weight                                                                      6 10 l label
+  7 11 a any                                                                         8                                                                                  9 yyy 7 -> 63                                                                     10                                                                                 11 000 - non-graph entity                                                          12 001 g graph                                                                     13 010 s set                                                                       14 011 n node                                                                      15 100 t tail arrow                                                                16 101 h head arrow                                                                17 110 T tail link                                                                 18 111 H head link                                                                 19                                                                                 20 zzz 0 -> 7                                                                      21                                                                                 22 | Value | Numeric Equivalent | Node/Set Permissions | Graph Permissions |
+ 23 |-------|-------------------|------------------|-----------------------|
+ 24 | `---` | 000 | No permissions | No permissions |                               25 | `--x` | 001 | Access contents | Access contents, Execute |                    26 | `-w-` | 010 | Write | Create or remove entity |                               27 | `-wx` | 011 | Write & access contents | Create or remove entity, access conte    nts, execute |                                                                  28 | `r--` | 100 | Read | List entity |                                            29 | `r-x` | 101 | Read & access contents | List entity, access contents, execute     |
+ 30 | `rw-` | 110 | Read & write | List entity, create or remove entity |           31 | `rwx` | 111 | Read, write & access contents | List entity, create or remove e    ntity, access contents & execute |                                              32
+ 33 These permissions can be set for three types of users:
+ 34
+ 35 1. **Owner**: The user who owns the file or directory.                          36 2. **Group**: Users who are part of the group that owns the file or directory.
+ 37 3. **Others**: All other users.
+ 38
+ 39 When you use the `chmod` command to set permissions, you provide three digits:     one for the owner, one for the group, and one for others. For example, `chmod 7    54 filename` will set the permissions as follows:
+ 40
+ 41 - Owner: `rwx` (7)
+ 42 - Group: `r-x` (5)
+ 43 - Others: `r--` (4)
+ 44
+ 45 So the owner can read, write, and execute the file; users in the group can read     and execute the file; all other users can only read the file.
+ 46
+ 47 Keep in mind, these are the basic permissions. Unix-like systems also have addi    tional permissions like the setuid, setgid, and sticky bits.
